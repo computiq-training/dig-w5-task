@@ -21,7 +21,7 @@ Let's take a scenario:
 - Use can delete a history by click on delete button of the history row.
 ## Prerequisites
 - Clone and run latest changes of clinc-api repo (https://github.com/computiq-training/clinic-api.git)
-- Postman to test Rest API, you can find API collection.json from here ().
+- Postman to test Rest API, you can find API collection.json from here (https://drive.google.com/file/d/1-UVYD7gdvn1OGodKU6cru-gcC7JFKjq5/view?usp=share_link).
 
 ## Requirements
 - Implement on patient row click: to redirect user to route/page `patients/id`, passing id of clicked patient.
