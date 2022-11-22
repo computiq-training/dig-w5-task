@@ -39,3 +39,6 @@ Let's take a scenario:
 ## UI/UX
 ![New History](https://user-images.githubusercontent.com/20383171/203422472-06e0a181-f70c-4950-bf5a-ef5f23372433.png)
 ![History Profile](https://user-images.githubusercontent.com/20383171/203422477-6540b000-831a-49d9-a7c6-36d8e515a1e7.png)
+
+## Hints
+- You may need help of implementing Modal component https://tailwind-elements.com/docs/standard/components/modal/
