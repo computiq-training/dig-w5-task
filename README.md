@@ -32,7 +32,10 @@ Let's take a scenario:
   - Implement histpry delete.
   - Implement `add new history` feature (button and modal).
 - Try as much as possible to match look and feel of yours with below XD design.
-
+## Endpoints
+- `patients/id` GET: to get specific patient with history list
+- `patients/id/history` POST: to add new history for the patient.
+- `patients/history/id` DELETE: to delete a history record 
 ## UI/UX
 ![New History](https://user-images.githubusercontent.com/20383171/203422472-06e0a181-f70c-4950-bf5a-ef5f23372433.png)
 ![History Profile](https://user-images.githubusercontent.com/20383171/203422477-6540b000-831a-49d9-a7c6-36d8e515a1e7.png)
