@@ -10,16 +10,19 @@ export default function Layout(){
     const {logout} = authContext;
     console.log('c',context)
     const color = context.settings.themeValue.background;
+    const color_header = "bg-blue-500";
     return <>
-        <header className={`h-16 ${color}`}>
-            <Switcher/>
-            <button onClick={logout}>Logout</button>
-        </header>
-        <div className="flex flex-row">
+
+        <div className="flex flex-row ">
             <Sidebar/>
-            <div id="detiails" className="w-full p-8">
-                <Outlet/>
+            <div className="w-full">
+                <header className={`h-max ${color_header}`}>
+                    <Switcher/>
+                </header>
+                <div id="detiails" className="w-full color:#f2f8ff">
+                    <Outlet/>
+                </div>
             </div>
-        </div>
+        </div>        
     </>
 }
