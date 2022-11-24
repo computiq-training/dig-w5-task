@@ -10,11 +10,11 @@ const NewHistory =({id,isOpen,isOff,history,sethistory})=>{
   const navigate=useNavigate()
   const [pres , setPres] = useState([])
   const [report,setReport] = useState('')
-  const [date,setDate] = useState(new Date())
+  const [date,setDate] = useState()
   console.log(isOpen);  
   const addNew = ()=>{
     console.log("iddd",id);
-    if(!date || !report )
+    if(!isNaN(date) || !report )
     {
         // alert('Please fill all the info')
         alert('Please fill all the info')
@@ -47,7 +47,7 @@ const NewHistory =({id,isOpen,isOff,history,sethistory})=>{
     })
 }
 const reset = ()=>{
-  setDate(new Date());
+  setDate("");
   setReport('');
   setPres([]);
   setPres1([]);
@@ -102,7 +102,7 @@ console.log("pattewqweqwttt",);
         </div >
         <div className="">
             <form className="grid place-items-center m-5	p-5" >
-        <input className="border border-solid py-1 px-2 m-5 border-solid  focus:outline-none" value={date} onChange={changeDate} type="date" placeholder="date"/>
+        <input className="border border-solid py-1 px-2 m-5 border-solid  focus:outline-none" value={date} onChange={changeDate} required type="date" placeholder="date"/>
         <input className="h-48 w-64  border border-solid m-5 py-1 px-2 border-solid  focus:outline-none" value={report} onChange={changeReport} type="text" placeholder="report"/>
         <input className="border border-solid py-1 px-2 m-5 border-solid  focus:outline-none" value={pres} onChange={changePres} type="text" placeholder="pres"/>
          <button className="my-10 px-6 py-2.5  bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" value={pres1} type='button' onClick={clickPres}>+</button>
