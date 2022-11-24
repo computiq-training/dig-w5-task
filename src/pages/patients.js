@@ -1,7 +1,7 @@
 import { useState, useEffect,useContext } from "react"
 import PCard from "../components/PatientCard";
 import { useSnackbar } from 'react-simple-snackbar'
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import axios from "axios";
 import {URL} from '../constants/web_service'
@@ -31,6 +31,7 @@ const Patients =  (props)=>{
     const [searchValue,setSearchValue] = useState('')
     const authContext = useContext(AuthContext)
     const {user,isAuth,jwtToken} = authContext;
+    const navigate=useNavigate();
     console.log('token passed:',jwtToken)
     console.log('user data from auth context is ',user,isAuth)
     const addNew = ()=>{
@@ -118,6 +119,10 @@ const Patients =  (props)=>{
         setFilteredPatients(results)
 
     }
+    const Topatient =(id)=>{
+        console.log(id);
+             navigate(`/patients/${id}`);
+    }
     const deleteRow = (id)=>{
         axios.delete(`${URL}patients/${id}`,)
         .then((res)=>{
@@ -152,29 +157,26 @@ const Patients =  (props)=>{
     }, []);
    
 
-    return <div>
+    return <div className="pl-10 pt-10 h-screen	 bg-gray-200">
         
     
-    <form onSubmit={submit}>
-        <input className="border border-solid py-1 px-2 border-solid  focus:outline-none" value={fullName} onChange={changeFullName} type="text" placeholder="Full Name"/>
-        <input className="border border-solid py-1 px-2 border-solid  focus:outline-none" value={phone} onChange={changePhone} type="text" placeholder="Phone"/>
-        <input className="border border-solid py-1 px-2 border-solid  focus:outline-none" value={birthDate} onChange={changeBD} type="date" placeholder="Birth Date"/>
-        <select className="border border-solid py-1 px-2 border-solid  focus:outline-none" value={gender} onChange={genderOnChange}>
+    <form className="flex justify-center p-5 " onSubmit={submit}>
+        <input className="border border-solid py-1 px-5 m-5 border-solid  focus:outline-none" value={fullName} onChange={changeFullName} type="text" placeholder="Full Name"/>
+        <input className="border border-solid py-1 px-5 m-5 border-solid  focus:outline-none" value={phone} onChange={changePhone} type="text" placeholder="Phone"/>
+        <input className="border border-solid py-1 px-5 m-5 border-solid  focus:outline-none" value={birthDate} onChange={changeBD} type="date" placeholder="Birth Date"/>
+        <select className="border border-solid py-1 px-5 m-5  border-solid  focus:outline-none" value={gender} onChange={genderOnChange}>
             <option value='m' selected>Male</option>
             <option value="f">Female</option>
         </select>
-        <input className="py-1 px-2 rounded-lg bg-sky-400" type="submit"/>
+        <input className="py-1 px-2 rounded-lg bg-sky-400 m-5" type="submit"/>
     </form>
-    <input value={searchValue} onChange={onSearchChange} type="text" placeholder="Search"/>
+    <div className="flex justify-center py-1 px-5 m-5 "><input  value={searchValue} onChange={onSearchChange} type="text" placeholder="Search"/></div>
+    
 
-    {
-        // patients?patients.map((item,index)=>{
-        //     return <PCard key={index} data={item}/>
-        //    })
-        //    :
-        //    <p>No Data</p>
-        <table className="w-full border-collapse border border-slate-400">
-  <thead>
+    
+    <div className=" h-[584px] overflow-scroll overflow-x-hidden"  >
+        <table className=" w-full border-collapse py-10 my-10 border border-slate-400  ">
+  <thead className="bg-cyan-400">
     <tr>
       <th className="border border-slate-300">ID</th>
       <th className="border border-slate-300">Full Name</th>
@@ -187,20 +189,22 @@ const Patients =  (props)=>{
   <tbody>
         {
             filteredPatients && filteredPatients.map((item, index)=>{
-                return <tr>
-                <td className="border border-slate-300">{item._id}</td>
-                <td className="border border-slate-300">{item.full_name}</td>
-                <td className="border border-slate-300">{item.birth_date}</td>
-                <td className="border border-slate-300">{item.phone}</td>
-                <td className="border border-slate-300">{item.gender}</td>
-                <td className="border border-slate-300"><button className="bg-red-300 p-1" onClick={()=>deleteRow(item._id)}>DELETE</button></td>
+                return <tr onClick={(e)=>Topatient(item._id)}>
+                <td className="border border-slate-300 text-center ">{item._id}</td>
+                <td className="border border-slate-300 text-center">{item.full_name}</td>
+                <td className="border border-slate-300 text-center">{item.birth_date}</td>
+                <td className="border border-slate-300 text-center">{item.phone}</td>
+                <td className="border border-slate-300 text-center">{item.gender}</td>
+                <td className="border border-slate-300 text-center "><button className="bg-red-300 p-1" onClick={()=>deleteRow(item._id)}>DELETE</button>
+                    
+                    </td>
 
               </tr>
             })
         }
   </tbody>
 </table>
-    }
+    </div>
 </div>
 }
 
