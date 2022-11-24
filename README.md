@@ -21,7 +21,7 @@ Let's take a scenario:
 - Use can delete a history by click on delete button of the history row.
 ## Prerequisites
 - Clone and run latest changes of clinc-api repo (https://github.com/computiq-training/clinic-api.git)
-- Postman to test Rest API, you can find API collection.json from here ().
+- Postman to test Rest API, you can find API collection.json from here (https://drive.google.com/file/d/1-UVYD7gdvn1OGodKU6cru-gcC7JFKjq5/view?usp=share_link).
 
 ## Requirements
 - Implement on patient row click: to redirect user to route/page `patients/id`, passing id of clicked patient.
@@ -32,7 +32,13 @@ Let's take a scenario:
   - Implement histpry delete.
   - Implement `add new history` feature (button and modal).
 - Try as much as possible to match look and feel of yours with below XD design.
-
+## Endpoints
+- `patients/id` GET: to get specific patient with history list
+- `patients/id/history` POST: to add new history for the patient.
+- `patients/history/id` DELETE: to delete a history record 
 ## UI/UX
 ![New History](https://user-images.githubusercontent.com/20383171/203422472-06e0a181-f70c-4950-bf5a-ef5f23372433.png)
 ![History Profile](https://user-images.githubusercontent.com/20383171/203422477-6540b000-831a-49d9-a7c6-36d8e515a1e7.png)
+
+## Hints
+- You may need help of implementing Modal component https://tailwind-elements.com/docs/standard/components/modal/
