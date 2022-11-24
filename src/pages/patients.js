@@ -5,39 +5,45 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import axios from "axios";
 import {URL} from '../constants/web_service'
+import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const options = {
     position: 'bottom-right',
     style: {
-      backgroundColor: 'midnightblue',
-      border: '2px solid lightgreen',
-      color: 'lightblue',
-      fontSize: '20px',
-      textAlign: 'center',
+        backgroundColor: 'black',
+        border: '2px solid DarkRed',
+        color: 'white',
+        fontSize: '20px',
+        textAlign: 'center',
     },
     closeStyle: {
-      color: 'lightcoral',
-      fontSize: '16px',
+        color: 'red',
+        fontSize: '16px',
     },
-  }
+}
+
 const Patients =  (props)=>{
     const [patients, setPatients] = useState([])
     const [filteredPatients, setFilteredPatients] = useState([])
     const [open,close] = useSnackbar(options)
     const [fullName , setFullName] = useState('')
     const [phone,setPhone] = useState('')
-    const [birthDate,setBirthDate] = useState(new Date())
-    const [gender, setGender] = useState('m')
+    // const [birthDate,setBirthDate] = useState(new Date())
+    const [birthDate,setBirthDate] = useState()
+    const [gender, setGender] = useState('Male')
     const [searchValue,setSearchValue] = useState('')
     const authContext = useContext(AuthContext)
     const {user,isAuth,jwtToken} = authContext;
+    const navigate=useNavigate();
     console.log('token passed:',jwtToken)
     console.log('user data from auth context is ',user,isAuth)
     const addNew = ()=>{
         if(!fullName || !phone || !birthDate || !gender)
         {
-            // alert('Please fill all the info')
-            open('Please fill all the info')
+            // alert('Please Fill All The Info')
+            open('Please Fill All The Info')
             return;
         }
         axios.post(`${URL}patients`,{
@@ -52,10 +58,10 @@ const Patients =  (props)=>{
             let pTemp = !patients?[]:patients
                 pTemp.push({
                     _id:res.data.data._id,
-                            full_name:fullName,
-                            birth_date:birthDate,
-                            gender:gender,
-                            phone:phone
+                    full_name:fullName,
+                    birth_date:birthDate,
+                    gender:gender,
+                    phone:phone
                 })
 
         setPatients([...pTemp])
@@ -90,9 +96,10 @@ const Patients =  (props)=>{
     }
 
     const reset = ()=>{
+        // Date.now()
         setFullName('')
-        setBirthDate(Date.now())
-        setGender('m')
+        setBirthDate('')
+        setGender('Male')
         setPhone('')
     }
 
@@ -123,8 +130,8 @@ const Patients =  (props)=>{
         .then((res)=>{
             console.log('response after deletion',res)
             let temp = patients;
-        console.log(id,'deleted')
-        let index = temp.findIndex((item)=>{
+            console.log(id,'deleted')
+            let index = temp.findIndex((item)=>{
             return item._id === id
         })
         console.log('index,',index)
@@ -139,6 +146,12 @@ const Patients =  (props)=>{
             console.error(err)
         })
     }
+
+    const route_history =(id)=>{
+        console.log('route_history id:',id);
+        navigate(`/history/${id}`);
+    }
+
     useEffect(() => {
         axios.get(`${URL}patients`)
         .then((res)=>{
@@ -152,20 +165,24 @@ const Patients =  (props)=>{
     }, []);
    
 
-    return <div>
+    return <section className="px-10 py-8 bg-[#f2f8ff] h-screen" >
         
     
     <form onSubmit={submit}>
-        <input className="border border-solid py-1 px-2 border-solid  focus:outline-none" value={fullName} onChange={changeFullName} type="text" placeholder="Full Name"/>
-        <input className="border border-solid py-1 px-2 border-solid  focus:outline-none" value={phone} onChange={changePhone} type="text" placeholder="Phone"/>
-        <input className="border border-solid py-1 px-2 border-solid  focus:outline-none" value={birthDate} onChange={changeBD} type="date" placeholder="Birth Date"/>
-        <select className="border border-solid py-1 px-2 border-solid  focus:outline-none" value={gender} onChange={genderOnChange}>
-            <option value='m' selected>Male</option>
-            <option value="f">Female</option>
+        <input className="rounded-lg input_text border border-solid py-1 px-2 border-solid  focus:outline-none" value={fullName} onChange={changeFullName} type="text" placeholder="Full Name"/>
+        <input className="rounded-lg input_text border border-solid py-1 px-2 border-solid  focus:outline-none" value={phone} onChange={changePhone} type="text" placeholder="Phone"/>
+        <input className="rounded-lg input_text border border-solid py-1 px-2 border-solid  focus:outline-none" value={birthDate} onChange={changeBD} type="date" placeholder="Birth Date"/>
+        <select className="rounded-lg input_text border border-solid py-1 px-2 border-solid  focus:outline-none" value={gender} onChange={genderOnChange}>
+            <option value='Male' defaultValue>Male</option>
+            <option value="Female">Female</option>
         </select>
-        <input className="py-1 px-2 rounded-lg bg-sky-400" type="submit"/>
+        {/* <input className="add py-1 px-2 rounded-lg bg-sky-400" type="submit"/> */}
+        <button 
+        // className="add py-1 px-2 rounded-lg bg-sky-400"
+        className="inline-block px-8 py-3.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+        type="submit">Add</button>
     </form>
-    <input value={searchValue} onChange={onSearchChange} type="text" placeholder="Search"/>
+    <input className="rounded-lg input_search" value={searchValue} onChange={onSearchChange} type="text" placeholder="Search"/>
 
     {
         // patients?patients.map((item,index)=>{
@@ -174,34 +191,41 @@ const Patients =  (props)=>{
         //    :
         //    <p>No Data</p>
         <table className="w-full border-collapse border border-slate-400">
-  <thead>
-    <tr>
-      <th className="border border-slate-300">ID</th>
-      <th className="border border-slate-300">Full Name</th>
-      <th className="border border-slate-300">Birth Date</th>
-      <th className="border border-slate-300">Phone</th>
-      <th className="border border-slate-300">Gender</th>
-      <th className="border border-slate-300">DELETION</th>
-    </tr>
-  </thead>
-  <tbody>
+            <thead>
+                <tr>
+                    <th className="border border-slate-300">ID</th>
+                    <th className="border border-slate-300">Full Name</th>
+                    <th className="border border-slate-300">Birth Date</th>
+                    <th className="border border-slate-300">Phone</th>
+                    <th className="border border-slate-300">Gender</th>
+                    <th className="border border-slate-300">Event</th>
+                    <th className="border border-slate-300">Details</th>
+                </tr>
+            </thead>
+            <tbody>
         {
-            filteredPatients && filteredPatients.map((item, index)=>{
-                return <tr>
-                <td className="border border-slate-300">{item._id}</td>
-                <td className="border border-slate-300">{item.full_name}</td>
-                <td className="border border-slate-300">{item.birth_date}</td>
-                <td className="border border-slate-300">{item.phone}</td>
-                <td className="border border-slate-300">{item.gender}</td>
-                <td className="border border-slate-300"><button className="bg-red-300 p-1" onClick={()=>deleteRow(item._id)}>DELETE</button></td>
-
-              </tr>
+            filteredPatients && filteredPatients.length>0?filteredPatients.map((item, index)=>{
+                return <tr key={index}  >
+                <td onClick={(id)=>route_history(item._id)} className="border border-slate-300">{item._id}</td>
+                <td onClick={(id)=>route_history(item._id)} className="border border-slate-300">{item.full_name}</td>
+                <td onClick={(id)=>route_history(item._id)} className="border border-slate-300">{item.birth_date}</td>
+                <td onClick={(id)=>route_history(item._id)} className="border border-slate-300">{item.phone}</td>
+                <td onClick={(id)=>route_history(item._id)} className="border border-slate-300">{item.gender}</td>
+                <td className="border border-slate-300">
+                    <button 
+                    // className=" rounded-lg bg-red-300 p-1" 
+                    className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+                    onClick={()=>deleteRow(item._id)}>Delete</button></td>
+                <td className="border border-slate-300"><Link to={"/history/"+item._id}>Details</Link></td>
+            </tr>
             })
+            :
+            <tr><td><p>No Data</p></td></tr>
         }
-  </tbody>
+    </tbody>
 </table>
     }
-</div>
+</section>
 }
 
 export default Patients;
