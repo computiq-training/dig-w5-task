@@ -1,7 +1,7 @@
 import { useState, useEffect,useContext } from "react"
 import PCard from "../components/PatientCard";
 import { useSnackbar } from 'react-simple-snackbar'
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import axios from "axios";
 import {URL} from '../constants/web_service'
@@ -189,13 +189,13 @@ const Patients =  (props)=>{
             filteredPatients && filteredPatients.map((item, index)=>{
                 return <tr>
                 <td className="border border-slate-300">{item._id}</td>
-                <td className="border border-slate-300">{item.full_name}</td>
+                <Link to={`/patients/${item._id}`}><td className="border border-slate-300">{item.full_name}</td></Link>
                 <td className="border border-slate-300">{item.birth_date}</td>
                 <td className="border border-slate-300">{item.phone}</td>
                 <td className="border border-slate-300">{item.gender}</td>
                 <td className="border border-slate-300"><button className="bg-red-300 p-1" onClick={()=>deleteRow(item._id)}>DELETE</button></td>
 
-              </tr>
+              </tr> 
             })
         }
   </tbody>

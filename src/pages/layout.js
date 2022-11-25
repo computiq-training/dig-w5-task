@@ -11,10 +11,10 @@ export default function Layout(){
     console.log('c',context)
     const color = context.settings.themeValue.background;
     return <>
-        <header className={`h-16 ${color}`}>
+        {/* <header className={`h-16 ${color}`}>
             <Switcher/>
             <button onClick={logout}>Logout</button>
-        </header>
+        </header> */}
         <div className="flex flex-row">
             <Sidebar/>
             <div id="detiails" className="w-full p-8">
