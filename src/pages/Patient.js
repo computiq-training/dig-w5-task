@@ -106,14 +106,25 @@ const reset=()=>{
 
 }
 
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
     
    
     return <>
 
 {/* <p>Patient Profile: {par.id} </p> */}
-    <p class="text-base font-light leading-relaxed mt-0 mb-4 text-gray-800">Name: {pat.full_name}</p>
-    <p class="text-base font-light leading-relaxed mt-0 mb-4 text-gray-800">Birth data: {pat.birth_date}</p>
-    <p class="text-base font-light leading-relaxed mt-0 mb-4 text-gray-800">Gender: {pat.gender}</p>
+    <p class="text-base font-light leading-relaxed mt-0 mb-4 text-gray-800">Name: {pat.full_name.toUpperCase()}</p>
+    <p class="text-base font-light leading-relaxed mt-0 mb-4 text-gray-800">Age: {getAge(pat.birth_date)}</p>
+    <p class="text-base font-light leading-relaxed mt-0 mb-4 text-gray-800">Gender: {pat.gender=='m'? "Male":"Female"}</p>
     <p class="text-base font-light leading-relaxed mt-0 mb-4 text-gray-800">phone: {pat.phone}</p>
 
     {/* <Modal/> */}
