@@ -6,20 +6,23 @@ import { Switcher } from "../components/Switcher";
 import { AuthContext } from "../contexts/AuthContext";
 export default function Layout(){
     const context = useContext(ThemeContext);
-    const authContext = useContext(AuthContext)
-    const {logout} = authContext;
+    
+    
     console.log('c',context)
-    const color = context.settings.themeValue.background;
-    return <>
-        <header className={`h-16 ${color}`}>
+    let color = context.settings.themeValue.background;
+    if (color =='bg-sky-300')
+    color="bg-sky-600"
+    console.log("sadsdas",color)
+    return <div >
+        <header className={`flex justify-end  p-5 h-16 ${color}`}>
             <Switcher/>
-            <button onClick={logout}>Logout</button>
+            
         </header>
-        <div className="flex flex-row">
+        <div className="flex flex-row   ">
             <Sidebar/>
-            <div id="detiails" className="w-full p-8">
+            <div id="detiails" className="w-full ">
                 <Outlet/>
             </div>
         </div>
-    </>
+    </div>
 }
