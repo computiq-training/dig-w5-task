@@ -189,12 +189,13 @@ const Patients =  (props)=>{
   <tbody>
         {
             filteredPatients && filteredPatients.map((item, index)=>{
-                return <tr onClick={(e)=>Topatient(item._id)}>
-                <td className="border border-slate-300 text-center ">{item._id}</td>
-                <td className="border border-slate-300 text-center">{item.full_name}</td>
-                <td className="border border-slate-300 text-center">{item.birth_date}</td>
-                <td className="border border-slate-300 text-center">{item.phone}</td>
-                <td className="border border-slate-300 text-center">{item.gender}</td>
+                return <tr >
+                <td onClick={(e)=>Topatient(item._id)} className="border border-slate-300 text-center ">{item._id}</td>
+                <td onClick={(e)=>Topatient(item._id)} className="border border-slate-300 text-center">{item.full_name}</td>
+                <td onClick={(e)=>Topatient(item._id)} className="border border-slate-300 text-center">{item.birth_date}</td>
+                <td onClick={(e)=>Topatient(item._id)} className="border border-slate-300 text-center">{item.phone}</td>
+                <td onClick={(e)=>Topatient(item._id)} className="border border-slate-300 text-center">{item.gender}</td>
+                
                 <td className="border border-slate-300 text-center "><button className="bg-red-300 p-1" onClick={()=>deleteRow(item._id)}>DELETE</button>
                     
                     </td>
