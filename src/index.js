@@ -11,41 +11,38 @@ import {
 import {ThemeProvider, THEMES} from './contexts/ThemeContext'
 import {Login} from './pages/login'
 import Patients from './pages/patients';
-import History from './pages/history'
+import Home from './pages/Home'
 import Layout from './pages/layout';
-import { Patient } from './pages/Patient';
 import SnackbarProvider from 'react-simple-snackbar'
 import { AuthProvider } from './contexts/AuthContext';
-import { Guard } from './components/GuardComponent';
+import PatientProfile from './pages/PatientPres';
+//import { Guard } from './components/GuardComponent';
 const router = createBrowserRouter([
   {
     path:'/',
-    element:<Guard>
-      <Layout/>
-    </Guard>,
+    element:
+      <Layout/>,
+
     children:[
       {
         path:'patients',
         element:<Patients/>
       },
       {
-        path:'history',
-        element:<History/>
+        path:'Home',
+        element:<Home/>
       },
       {
         path:'patients/:id',
-        element:<Patient/>
+        element:<PatientProfile/>
       }
+     
     ]
   },
   {
     path:'/login',
-    element:<Login/>
+    element:<Home/>
   },
-  {
-    path:'/about',
-    element:<h>About</h>
-  }
   
 ])
  const root = ReactDOM.createRoot(document.getElementById('root'));
