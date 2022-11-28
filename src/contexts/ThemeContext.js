@@ -1,20 +1,20 @@
+import React from 'react'
 import { createContext ,useState} from "react";
 
 export const THEMES = {
     dark:{
         name:'dark',
-        background:'bg-zinc-900'
+        background:'bg-zinc-300'
     },
     light:{
         name:'light',
-        background:'bg-sky-300'
+        background:'bg-white'
     }
 }
 
 let ThemeContext = createContext({
     theme:THEMES.light
 })
-// export const ThemeProvider = ThemeContext.Provider;
 export const ThemeProvider = ({theme,children})=>{
     console.log('default passed theme', theme)
     const [themeValue, setThemeValue] = useState(theme);

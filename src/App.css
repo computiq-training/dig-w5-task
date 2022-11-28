@@ -42,7 +42,7 @@
 }
 
 .card-bg{
-  background-color: aqua;
+  background-color: rgb(0, 255, 106);
   margin: 5px;
   padding: 5px;
 }
@@ -62,4 +62,89 @@
   background-color: #61dafb;
   padding: 5px;
   border-radius: 5px;
+}
+
+.logout{
+  background-color: #d7c7c7;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #3995FF;
+  color: white;
+}
+
+
+.add {
+  background-color: #3995FF;
+  border: none;
+  color: white;
+  padding: 12px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px 2px;
+  cursor: pointer;
+  border-radius: 10%;
+  font-weight:bold;
+  width: 140;
+  height: 40;
+}
+
+.delete {
+  background-color: #c99e9e;
+  border: none;
+  color: white;
+  padding: 16px 34px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 5px 3px;
+  cursor: pointer;
+  border-radius: 10%;
+}
+
+.input_text {
+  padding: 12px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 40px 10px;
+  cursor: pointer;
+}
+
+.input_search{
+    padding: 12px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 10px 10px;
+    cursor: pointer;
+    width: 30%;
+}
+
+.list_style{
+  list-style-type: disc;
 }
