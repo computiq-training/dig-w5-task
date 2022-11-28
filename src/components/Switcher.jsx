@@ -1,6 +1,6 @@
+import React, { useContext }  from 'react';
 import Switch from 'react-switch'
 import ThemeContext from '../contexts/ThemeContext'
-import { useContext } from 'react'
 export const Switcher = ()=>{
     const context = useContext(ThemeContext)
     console.log('c in switcher',context)
