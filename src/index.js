@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element:<Patients/>
       },
       {
-        path:'history',
+        path:'history/:id',
         element:<History/>
       },
       {

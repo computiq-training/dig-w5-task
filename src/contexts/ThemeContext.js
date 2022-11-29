@@ -7,7 +7,7 @@ export const THEMES = {
     },
     light:{
         name:'light',
-        background:'bg-sky-300'
+        background:'bg-white'
     }
 }
 
