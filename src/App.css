@@ -2,31 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
 .App-link {
   color: #61dafb;
@@ -36,30 +13,60 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-.card-bg{
-  background-color: aqua;
-  margin: 5px;
+
+.active {
+  color: #61dafb;
   padding: 5px;
 }
 
-.bg-blue{
-  background-color: blue;
-  margin: 5px;
-  padding: 5px;
-}
-.bg-pink{
-  background-color: pink;
-  margin: 5px;
-  padding: 5px;
-}
-
-.active{
-  background-color: #61dafb;
-  padding: 5px;
+.delete-button {
   border-radius: 5px;
+  border: 0px;
+  color: white;
+  background-color: #FF5353;
+  font-weight: bold;
+}
+
+.add-button {
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0px;
+  color: white;
+  background-color: #3995FF;
+  padding: 8px 60px;
+}
+
+
+.patients-table {
+  /* width: 90%; */
+  border-collapse: collapse;
+  border: 1px solid #ababab;
+  text-align: center;
+  vertical-align: middle;
+  margin: 2rem auto;
+}
+
+.patients-table td {
+  padding: 6px 12px;
+  color: grey;
+  font-size: 1rem;
+}
+
+.patients-table th {
+  padding: 6px 12px;
+  background: #3995FF;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.patients-table tr:nth-child(even) {
+  background-color: #ebebeb;
 }
