@@ -1,7 +1,7 @@
 import { useState, useEffect,useContext } from "react"
-import PCard from "../components/PatientCard";
+// import PCard from "../components/PatientCard";
 import { useSnackbar } from 'react-simple-snackbar'
-import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import axios from "axios";
 import {URL} from '../constants/web_service'
@@ -37,7 +37,7 @@ const Patients =  (props)=>{
         if(!fullName || !phone || !birthDate || !gender)
         {
             // alert('Please fill all the info')
-            open('Please fill all the info')
+            open('Please fill all information')
             return;
         }
         axios.post(`${URL}patients`,{
@@ -189,7 +189,7 @@ const Patients =  (props)=>{
             filteredPatients && filteredPatients.map((item, index)=>{
                 return <tr>
                 <td className="border border-slate-300">{item._id}</td>
-                <td className="border border-slate-300">{item.full_name}</td>
+                <Link to={`/patients/${item._id}`}><td className="border border-slate-300">{item.full_name}</td></Link>
                 <td className="border border-slate-300">{item.birth_date}</td>
                 <td className="border border-slate-300">{item.phone}</td>
                 <td className="border border-slate-300">{item.gender}</td>
